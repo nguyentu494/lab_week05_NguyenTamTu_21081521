@@ -1,20 +1,22 @@
 package vn.edu.iuh.fit.backend.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@ToString
 @Table(name = "job")
 public class Job {
     @Id
     @Column(name = "job_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "job_desc", nullable = false, length = 2000)
@@ -23,8 +25,11 @@ public class Job {
     @Column(name = "job_name", nullable = false)
     private String jobName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company")
     private Company company;
+
+    @OneToMany(mappedBy = "job", fetch = FetchType.EAGER)
+    private List<JobSkill> jobSkills;
 
 }

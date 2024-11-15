@@ -1,11 +1,8 @@
-package vn.edu.iuh.fit.backend.models;
+package vn.edu.iuh.fit.backend.ids;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
@@ -14,6 +11,8 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@ToString
 @Setter
 @Embeddable
 public class JobSkillId implements Serializable {

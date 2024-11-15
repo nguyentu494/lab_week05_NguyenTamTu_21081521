@@ -1,14 +1,13 @@
 package vn.edu.iuh.fit.backend.models;
 
+import com.neovisionaries.i18n.CountryCode;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import vn.edu.iuh.fit.backend.enums.Country;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "address")
@@ -26,7 +25,7 @@ public class Address {
 
     @Column(name = "country")
     @Enumerated
-    private Country country;
+    private CountryCode country;
 
     @Column(name = "number", length = 20)
     private String number;
@@ -34,7 +33,7 @@ public class Address {
     @Column(name = "zipcode", length = 7)
     private String zipcode;
 
-    public Address(String street, String city, Country country, String number, String zipcode) {
+    public Address(String street, String city, CountryCode country, String number, String zipcode) {
         this.street = street;
         this.city = city;
         this.country = country;

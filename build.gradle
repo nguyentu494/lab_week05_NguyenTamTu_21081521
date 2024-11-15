@@ -36,6 +36,9 @@ dependencies {
     implementation 'com.neovisionaries:nv-i18n:1.29'
 //For database REST
     implementation 'org.springframework.data:spring-data-rest-core:4.1.4'
+    // https://mvnrepository.com/artifact/net.datafaker/datafaker
+    implementation 'net.datafaker:datafaker:2.2.0'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

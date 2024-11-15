@@ -1,16 +1,15 @@
 package vn.edu.iuh.fit.backend.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
+@Builder
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "candidate")
@@ -35,6 +34,10 @@ public class Candidate {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "address", nullable = false)
     private Address address;
+
+    @OneToOne
+    @JoinColumn(name = "account")
+    private Account account;
 
     public Candidate(LocalDate dob, String email, String fullName, String phone, Address address) {
         this.dob = dob;

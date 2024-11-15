@@ -1,24 +1,22 @@
 package vn.edu.iuh.fit.backend.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import vn.edu.iuh.fit.backend.enums.SkillType;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
+@ToString
 @AllArgsConstructor
 @Entity
 @Table(name = "skill")
 public class Skill {
     @Id
     @Column(name = "skill_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(name = "skill_description")
@@ -28,6 +26,7 @@ public class Skill {
     private String skillName;
 
     @Column(name = "type")
+    @Enumerated
     private SkillType type;
 
 }

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm Ứng Viên Phù Hợp</title>
+    <!-- Link Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Tìm Ứng Viên Phù Hợp</h1>
+
+    <!-- Form nhập yêu cầu công việc -->
+    <form id="jobForm">
+        <div class="form-group">
+            <label for="jobTitle">Tiêu Đề Công Việc</label>
+            <input type="text" class="form-control" id="jobTitle" placeholder="Nhập tiêu đề công việc">
+        </div>
+
+        <div class="form-group">
+            <label for="jobSkills">Kỹ Năng Yêu Cầu</label>
+            <input type="text" class="form-control" id="jobSkills" placeholder="Nhập kỹ năng yêu cầu (ngăn cách bởi dấu phẩy)">
+        </div>
+
+        <div class="form-group">
+            <label for="jobExperience">Kinh Nghiệm Yêu Cầu (năm)</label>
+            <input type="number" class="form-control" id="jobExperience" placeholder="Nhập số năm kinh nghiệm yêu cầu">
+        </div>
+
+        <button type="button" class="btn btn-primary btn-block" onclick="findCandidates()">Tìm Ứng Viên</button>
+    </form>
+
+    <!-- Danh sách ứng viên phù hợp -->
+    <div class="mt-5">
+        <h3 class="text-center">Danh Sách Ứng Viên Phù Hợp</h3>
+        <table class="table table-bordered mt-3">
+            <thead class="thead-light">
+            <tr>
+                <th>Tên Ứng Viên</th>
+                <th>Email</th>
+                <th>Kỹ Năng</th>
+                <th>Kinh Nghiệm</th>
+                <th>Thao Tác</th>
+            </tr>
+            </thead>
+            <tbody id="candidateList">
+            <!-- Danh sách ứng viên sẽ được thêm động ở đây -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Link Bootstrap JS và jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Hàm giả lập tìm kiếm ứng viên
+    function findCandidates() {
+        // Lấy thông tin từ form
+        const jobTitle = document.getElementById('jobTitle').value;
+        const jobSkills = document.getElementById('jobSkills').value.split(',').map(skill => skill.trim());
+        const jobExperience = document.getElementById('jobExperience').value;
+
+        // Dữ liệu giả lập ứng viên
+        const candidates = [
+            { name: 'Nguyễn Văn A', email: 'nguyenvana@example.com', skills: 'JavaScript, React, Node.js', experience: 3 },
+            { name: 'Lê Thị B', email: 'lethib@example.com', skills: 'Python, Machine Learning, AI', experience: 5 },
+            { name: 'Trần Văn C', email: 'tranvanc@example.com', skills: 'Java, Spring Boot, SQL', experience: 4 }
+        ];
+
+        // Tìm ứng viên phù hợp
+        const filteredCandidates = candidates.filter(candidate => {
+            const hasSkills = jobSkills.every(skill => candidate.skills.includes(skill));
+            const hasExperience = candidate.experience >= jobExperience;
+            return hasSkills && hasExperience;
+        });
+
+        // Hiển thị danh sách ứng viên
+        const candidateList = document.getElementById('candidateList');
+        candidateList.innerHTML = '';
+
+        filteredCandidates.forEach(candidate => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${candidate.name}</td>
+                    <td>${candidate.email}</td>
+                    <td>${candidate.skills}</td>
+                    <td>${candidate.experience} năm</td>
+                    <td><button class="btn btn-success btn-sm" onclick="sendInvite('${candidate.email}')">Gửi Thư Mời</button></td>
+                `;
+            candidateList.appendChild(row);
+        });
+
+        if (filteredCandidates.length === 0) {
+            candidateList.innerHTML = '<tr><td colspan="5" class="text-center">Không có ứng viên phù hợp</td></tr>';
+        }
+    }
+
+    // Hàm giả lập gửi email mời
+    function sendInvite(email) {
+        alert(`Đã gửi thư mời đến: ${email}`);
+    }
+</script>
+</body>
+</html>
