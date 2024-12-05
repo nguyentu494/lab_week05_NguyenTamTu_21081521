@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<!-- Sidebar Menu Fragment -->
+<div class="col-md-2 bg-light py-3" th:fragment="sidebar">
+    <div class="list-group sticky-top">
+        <a href="/companies/add-job" class="list-group-item list-group-item-action">Đăng Tin Tuyển Dụng</a>
+        <a href="/companies/search-candidate" class="list-group-item list-group-item-action">Tìm Ứng Viên</a>
+        <a href="/job/manage" class="list-group-item list-group-item-action">Quản Lý Tin Tuyển Dụng</a>
+        <a href="/profile" class="list-group-item list-group-item-action">Hồ Sơ Công Ty</a>
+        <a href="/logout" class="list-group-item list-group-item-action text-danger">Đăng Xuất</a>
+    </div>
+</div>
+
+</body>
+</html>

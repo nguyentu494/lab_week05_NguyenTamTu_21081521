@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import vn.edu.iuh.fit.backend.dto.RegisterCompanyDTO;
 import vn.edu.iuh.fit.backend.models.Company;
 import vn.edu.iuh.fit.backend.repositories.CompanyRepository;
 import vn.edu.iuh.fit.backend.services.CompanyService;
@@ -45,5 +46,27 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public Company findCompanyByAccount_Id(long id) {
         return companyRepository.findCompanyByAccount_Id(id);
+    }
+
+    @Override
+    public Company save(Company company) {
+        return companyRepository.save(company);
+    }
+
+    @Override
+    public RegisterCompanyDTO findCompanyDTOByUsername(String username) {
+        Company company = companyRepository.findCompanyByAccount_Username(username);
+        return RegisterCompanyDTO.builder()
+                .number(company.getAddress().getNumber())
+                .street(company.getAddress().getStreet())
+                .phone(company.getPhone())
+                .email(company.getEmail())
+                .city(company.getAddress().getCity())
+                .country(company.getAddress().getCountry())
+                .compName(company.getCompName())
+                .about(company.getAbout())
+                .webUrl(company.getWebUrl())
+                .zipcode(company.getAddress().getZipcode())
+                .build();
     }
 }

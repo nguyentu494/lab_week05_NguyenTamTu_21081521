@@ -21,9 +21,10 @@ import vn.edu.iuh.fit.backend.models.Job;
 import java.util.List;
 
 public interface JobService {
-    List<Job> findAll();
+    Page<Job> findAll(int currentPage, int pageSize, String sortField, String sortDir);
     List<Job> findJobByCompanyId(long id);
     Page<Job> findJobByCompanyId(Pageable pageable, long id);
-
+    Page<Job> findJobByCompanyEmail(Pageable pageable, String email);
     Job save(Job job);
+
 }

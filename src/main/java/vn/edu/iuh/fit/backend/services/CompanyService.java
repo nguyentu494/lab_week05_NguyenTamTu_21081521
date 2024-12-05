@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import vn.edu.iuh.fit.backend.dto.RegisterCompanyDTO;
 import vn.edu.iuh.fit.backend.models.Company;
 import vn.edu.iuh.fit.backend.repositories.CompanyRepository;
 
@@ -15,4 +16,7 @@ public interface CompanyService  {
     Company findCompanyById(long id);
     Page<Company> findAll(Pageable pageable);
     Company findCompanyByAccount_Id(long id);
+    Company save(Company company);
+
+    RegisterCompanyDTO findCompanyDTOByUsername(String username);
 }

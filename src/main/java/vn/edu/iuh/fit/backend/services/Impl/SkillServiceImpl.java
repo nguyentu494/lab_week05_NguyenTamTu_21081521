@@ -33,7 +33,7 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public Skill findById(Long id) {
-        return skillRepository.findById(id).orElse(null);
+    public Skill findById(long id) {
+        return skillRepository.findById(id);
     }
 }

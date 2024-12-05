@@ -27,9 +27,11 @@ public class Job {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company")
+    @ToString.Exclude
     private Company company;
 
     @OneToMany(mappedBy = "job", fetch = FetchType.EAGER)
+    @ToString.Exclude
     private List<JobSkill> jobSkills;
 
 }

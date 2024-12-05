@@ -6,6 +6,8 @@
 
 package vn.edu.iuh.fit.backend.services;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import vn.edu.iuh.fit.backend.dto.RegisterAccountDTO;
 import vn.edu.iuh.fit.backend.models.Account;
 import vn.edu.iuh.fit.backend.models.Candidate;
 
@@ -16,5 +18,8 @@ import vn.edu.iuh.fit.backend.models.Candidate;
  * @version: 1.0
  */
 public interface AccountService {
-    Account checkLogin(String username, String password);
+    RegisterAccountDTO checkLogin(String username, String password);
+    Account register(Account account);
+    UserDetails loadUserByUsername(String username);
+    Account findByUsername(String username);
 }

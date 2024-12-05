@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "candidate")
+@ToString
 public class Candidate {
     @Id
     @Column(name = "id", nullable = false)
@@ -30,6 +32,8 @@ public class Candidate {
 
     @Column(name = "phone", nullable = false, length = 15)
     private String phone;
+    @OneToMany(mappedBy = "can")
+    private List<CandidateSkill> candidateSkills;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "address", nullable = false)

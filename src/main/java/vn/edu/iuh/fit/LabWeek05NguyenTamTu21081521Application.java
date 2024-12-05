@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import vn.edu.iuh.fit.backend.enums.Role;
 import vn.edu.iuh.fit.backend.enums.SkillLevel;
 import vn.edu.iuh.fit.backend.enums.SkillType;
+import vn.edu.iuh.fit.backend.ids.CandidateSkillId;
 import vn.edu.iuh.fit.backend.ids.JobSkillId;
 import vn.edu.iuh.fit.backend.models.*;
 import vn.edu.iuh.fit.backend.repositories.*;
@@ -40,16 +41,36 @@ public class LabWeek05NguyenTamTu21081521Application {
     private AccountRepository accountRepository;
 
 //    @Bean
-//    CommandLineRunner initData(){
+//    CommandLineRunner initData(SkillRepository skillRepository,
+//                               CandidateSkillRepository candidateSkillRepository){
 //        return args -> {
 //            Faker faker = new Faker();
-//            for(int i = 0; i < 20; i++){
-//                Account account = Account.builder()
-//                        .username(faker.internet().username())
-//                        .password(faker.internet().password())
-//                        .role(i%2==0?Role.CANDIDATE:Role.COMPANY)
-//                        .build();
-//                accountRepository.save(account);
+//            Random random = new Random();
+//            for(int i = 1; i < 10; i++){
+//                System.out.println(i);
+//                Candidate candidate = candidateRepository.findCandidateById((long) i);
+//                if(i%3 == 0){
+//                    for(int j = 0 ; j < 3; j++){
+//                        CandidateSkill ck = new CandidateSkill();
+//                        Skill skill = skillRepository.findById((long) random.nextInt(200) + 1);
+//                        ck.setCan(candidate);
+//                        ck.setSkill(skill);
+//                        ck.setId(new CandidateSkillId(candidate.getId(), skill.getId()));
+//                        ck.setSkillLevel(SkillLevel.values()[random.nextInt(SkillLevel.values().length)]);
+//                        candidateSkillRepository.save(ck);
+//                    }
+//                }else{
+//                    for(int j = 0 ; j < 2; j++){
+//                        CandidateSkill ck = new CandidateSkill();
+//                        Skill skill = skillRepository.findById((long) random.nextInt(200) + 1);
+//                        ck.setCan(candidate);
+//                        ck.setSkill(skill);
+//                        ck.setId(new CandidateSkillId(candidate.getId(), skill.getId()));
+//                        ck.setSkillLevel(SkillLevel.values()[random.nextInt(SkillLevel.values().length)]);
+//                        candidateSkillRepository.save(ck);
+//                    }
+//                }
+//
 //            }
 //        };
 //    }

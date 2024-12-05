@@ -18,5 +18,5 @@ import java.util.List;
  */
 public interface SkillService {
     List<Skill> findAll();
-    Skill findById(Long id);
+    Skill findById(long id);
 }

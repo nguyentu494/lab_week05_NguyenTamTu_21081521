@@ -6,8 +6,12 @@
 
 package vn.edu.iuh.fit.backend.services;
 
+import vn.edu.iuh.fit.backend.dto.CandidateMatchDto;
 import vn.edu.iuh.fit.backend.models.Candidate;
 import vn.edu.iuh.fit.backend.models.Company;
+
+import java.util.List;
+import java.util.Optional;
 
 /*
  * @description:
@@ -17,4 +21,7 @@ import vn.edu.iuh.fit.backend.models.Company;
  */
 public interface CandidateService {
     Candidate findCandidateById(long id);
+    Candidate save(Candidate candidate);
+    List<CandidateMatchDto> findCandidatesByJobId(long jobId);
+    Candidate findByEmail(String email);
 }

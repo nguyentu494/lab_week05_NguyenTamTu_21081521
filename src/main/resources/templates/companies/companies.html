@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,73 +7,71 @@
     <!-- Link Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body class="bg-light d-flex flex-column min-vh-100">
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Company Portal</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <p th:text="${company.compName}"></p>
-</nav>
+<header th:replace="fragments/header :: header"></header>
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Trang Quản Lý Tuyển Dụng</h2>
+<!-- Main Content -->
+<div class="container-fluid">
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Đăng Tin Tuyển Dụng</h5>
-                    <p class="card-text">Tạo và đăng các tin tuyển dụng mới để tìm kiếm ứng viên phù hợp.</p>
-                    <a th:href="@{'/companies/add-job?a='+${account}}" class="btn btn-primary">Đăng Tin</a>
-                </div>
-            </div>
-        </div>
+        <div th:replace="fragments/sidebar :: sidebar"></div>
 
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Tìm Ứng Viên</h5>
-                    <p class="card-text">Tìm kiếm và chọn lọc ứng viên theo kỹ năng và kinh nghiệm.</p>
-                    <a th:href="@{'/companies/search-candidate?a='+${account}}" class="btn btn-primary">Tìm Ứng Viên</a>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Quản Lý Tin Tuyển Dụng</h5>
-                    <p class="card-text">Xem, chỉnh sửa, và quản lý các tin tuyển dụng đã đăng.</p>
-                    <a href="/job/manage" class="btn btn-primary">Quản Lý Tin</a>
+        <!-- Main Content Area -->
+        <div class="col-md-9">
+            <h4 class="my-4">Danh Sách Tin Tuyển Dụng</h4>
+            <div class="row">
+                <!-- Lặp qua danh sách các job -->
+                <div th:each="job : ${jobs}" class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <!-- Hiển thị tiêu đề công việc -->
+                            <h5 class="card-title" th:text="${job.getJobName()}">Tên Công Việc</h5>
+                            <h6 class="text-muted" th:text="${job.getCompany().getCompName()}">Tên công ty</h6>
+                            <!-- Kỹ năng -->
+                            <div>
+                                <span th:each="skill : ${job.getJobSkills()}"
+                                      class="badge badge-primary me-1"
+                                      th:text="${skill.getSkill().getSkillName()} + ' - ' + ${skill.getSkillLevel().name()}">
+                                    Kỹ Năng
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Job Pagination">
+                <ul class="pagination justify-content-center">
+                    <!-- Nút Previous -->
+                    <li class="page-item" th:classappend="${page > 1} ? '' : 'disabled'">
+                        <a class="page-link" th:href="@{'/companies?page=' + (${page} - 1)}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <!-- Hiển thị số trang -->
+                    <li class="page-item"
+                        th:each="i : ${#numbers.sequence(1, totalPages)}"
+                        th:classappend="${i == page} ? 'active' : ''">
+                        <a class="page-link" th:href="@{'/companies?page=' + ${i}}" th:text="${i}">1</a>
+                    </li>
+
+                    <!-- Nút Next -->
+                    <li class="page-item" th:classappend="${page < totalPages} ? '' : 'disabled'">
+                        <a class="page-link" th:href="@{'/companies?page=' + (${page})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
+    <footer th:replace="fragments/footer :: footer"></footer>
 
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Hồ Sơ Công Ty</h5>
-                    <p class="card-text">Xem và chỉnh sửa thông tin hồ sơ của công ty.</p>
-                    <a href="/profile" class="btn btn-secondary">Hồ Sơ Công Ty</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Đăng Xuất</h5>
-                    <p class="card-text">Thoát khỏi hệ thống quản lý tuyển dụng.</p>
-                    <a href="/logout" class="btn btn-danger">Đăng Xuất</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Link Bootstrap JS and dependencies -->

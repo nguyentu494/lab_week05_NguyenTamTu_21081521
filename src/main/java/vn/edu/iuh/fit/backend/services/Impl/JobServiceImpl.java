@@ -15,7 +15,9 @@ package vn.edu.iuh.fit.backend.services.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import vn.edu.iuh.fit.backend.models.Job;
 import vn.edu.iuh.fit.backend.repositories.JobRepository;
@@ -30,8 +32,11 @@ public class JobServiceImpl implements JobService {
     private JobRepository jobRepository;
 
     @Override
-    public List<Job> findAll() {
-        return null;
+    public Page<Job> findAll(int currentPage, int pageSize, String sortField, String sortDir) {
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDir), sortField);Sort.by(Sort.Direction.fromString(sortDir), sortField);
+        Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
+
+        return jobRepository.findAll(pageable);
     }
 
     @Override
@@ -42,6 +47,11 @@ public class JobServiceImpl implements JobService {
     @Override
     public Page<Job> findJobByCompanyId(Pageable pageable, long id) {
         return jobRepository.findJobByCompanyId(pageable, id);
+    }
+
+    @Override
+    public Page<Job> findJobByCompanyEmail(Pageable pageable, String email) {
+        return jobRepository.findJobByCompany_Email(pageable, email);
     }
 
     @Override

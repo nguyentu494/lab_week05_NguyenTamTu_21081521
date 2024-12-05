@@ -18,4 +18,5 @@ import vn.edu.iuh.fit.backend.models.Address;
 @Service
 public interface AddressService {
     Address findAddressById(long id);
+    Address save(Address address);
 }
