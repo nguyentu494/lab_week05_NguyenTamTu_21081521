@@ -24,4 +24,5 @@ public interface CandidateService {
     Candidate save(Candidate candidate);
     List<CandidateMatchDto> findCandidatesByJobId(long jobId);
     Candidate findByEmail(String email);
+    Candidate findByAccount_Username(String username);
 }

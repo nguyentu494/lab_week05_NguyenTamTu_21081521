@@ -19,8 +19,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import vn.edu.iuh.fit.backend.dto.JobSuggestionDTO;
+import vn.edu.iuh.fit.backend.models.Candidate;
 import vn.edu.iuh.fit.backend.models.Job;
 import vn.edu.iuh.fit.backend.repositories.JobRepository;
+import vn.edu.iuh.fit.backend.services.AccountService;
+import vn.edu.iuh.fit.backend.services.CandidateService;
 import vn.edu.iuh.fit.backend.services.JobService;
 
 import java.util.List;
@@ -30,6 +34,8 @@ public class JobServiceImpl implements JobService {
 
     @Autowired
     private JobRepository jobRepository;
+    @Autowired
+    private CandidateService candidateService;
 
     @Override
     public Page<Job> findAll(int currentPage, int pageSize, String sortField, String sortDir) {
@@ -57,5 +63,12 @@ public class JobServiceImpl implements JobService {
     @Override
     public Job save(Job job) {
         return jobRepository.save(job);
+    }
+
+
+    @Override
+    public Page<JobSuggestionDTO> findJobsByUsername(Pageable pageable, String username) {
+        Candidate candidate = candidateService.findByAccount_Username(username);
+        return jobRepository.findJobsByCandidateId(pageable, candidate.getId());
     }
 }

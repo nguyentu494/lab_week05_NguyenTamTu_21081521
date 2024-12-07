@@ -22,4 +22,5 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
             "HAVING COUNT(cs.skill.id) > 0 " +
             "ORDER BY COUNT(cs.skill.id) DESC")
     List<CandidateMatchDto> findCandidatesByJobId(long jobId);
+    Candidate findByAccount_Username(String username);
 }

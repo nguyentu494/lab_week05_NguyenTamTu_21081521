@@ -46,4 +46,9 @@ public class CandidateServiceImpl implements CandidateService {
     public Candidate findByEmail(String email) {
         return candidateRepository.findByEmail(email);
     }
+
+    @Override
+    public Candidate findByAccount_Username(String username) {
+        return candidateRepository.findByAccount_Username(username);
+    }
 }

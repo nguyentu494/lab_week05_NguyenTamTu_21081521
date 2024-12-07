@@ -34,7 +34,7 @@ public class SecurityConfig {
                                 .requestMatchers("/login").permitAll()
 //                                .anyRequest().authenticated()
                                 .anyRequest().permitAll()
-                )
+                ).csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/",true)
