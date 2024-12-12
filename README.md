@@ -1,6 +1,6 @@
-# Nguyễn Tâm Tú - 21081521
+![image](https://github.com/user-attachments/assets/49a17ae3-145c-4fe6-9543-f1f02307f824)# Lab Week 05 - Spring Boot Project
 
-# Lab Week 05 - Spring Boot Project
+# Nguyễn Tâm Tú
 
 ## Mục Tiêu Dự Án
 Xây dựng một ứng dụng Spring Boot hỗ trợ:
@@ -13,6 +13,14 @@ Xây dựng một ứng dụng Spring Boot hỗ trợ:
    - Hỗ trợ công ty tìm ứng viên có kỹ năng phù hợp.
    - Gửi email mời ứng viên phù hợp tham gia ứng tuyển.
    - Đề xuất các kỹ năng mà ứng viên có thể học để tăng cơ hội việc làm.
+
+---
+
+## Chức Năng Chính
+- Công ty đăng bài tuyển dụng với kỹ năng mong muốn.
+- Ứng viên nhận gợi ý công việc phù hợp.
+- Công ty tìm ứng viên và gửi email mời ứng tuyển.
+- Đề xuất kỹ năng học tập cho ứng viên.
 
 ---
 
@@ -29,15 +37,9 @@ Khi thực thi, ứng dụng sẽ tạo ra các bảng trong cơ sở dữ liệ
 - **UserSkill**: Liên kết ứng viên với các kỹ năng họ có.
 - **JobSkill**: Liên kết công việc với các kỹ năng yêu cầu.
 
-Sơ đồ bảng:
+Sơ đồ lớp:
+![image](https://github.com/user-attachments/assets/d67b5325-5577-4fea-8cea-1e1fc6fdc44b)
 
-```plaintext
-User       Company        JobPost         Skill
-| id       | id           | id            | id
-| name     | name         | title         | name
-| email    | email        | description   |
-| skills   | jobPosts     | company_id    |
-```
 
 #### Ghi chú:
 Sử dụng các mối quan hệ **@OneToMany**, **@ManyToOne**, và **@ManyToMany** để liên kết các thực thể.
@@ -45,40 +47,58 @@ Sử dụng các mối quan hệ **@OneToMany**, **@ManyToOne**, và **@ManyToMa
 ### 2. **Repositories Interface**
 Tạo các repository để thao tác với cơ sở dữ liệu:
 
-- **UserRepository**: Quản lý các thao tác trên bảng User.
+- **AddressRepository**: Quản lý các thao tác trên bảng Address.
+- **AccountRepository**: Quản lý các thao tác trên bảng Account.
+- **CandidateRepository**: Quản lý các thao tác trên bảng Candidate
+- **ExperienceRepository**: Quản lý các thao tác trên bảng Experience
 - **CompanyRepository**: Quản lý các thao tác trên bảng Company.
-- **JobPostRepository**: Quản lý các thao tác trên bảng JobPost.
+- **JobRepository**: Quản lý các thao tác trên bảng Job.
 - **SkillRepository**: Quản lý các thao tác trên bảng Skill.
-- **UserSkillRepository**: Quản lý liên kết kỹ năng của ứng viên.
+- **CandidateSkillRepository**: Quản lý liên kết kỹ năng của ứng viên.
 - **JobSkillRepository**: Quản lý liên kết kỹ năng của công việc.
+![image](https://github.com/user-attachments/assets/f86bc5ac-4b15-4c53-b87e-5742ec7b7879)
 
 ### 3. **Lớp Services**
 Cung cấp các chức năng chính:
+![image](https://github.com/user-attachments/assets/0fbb1e62-930b-4444-a012-f04085507931)
 
-- **UserService**: Quản lý logic liên quan đến ứng viên.
-- **CompanyService**: Quản lý logic liên quan đến công ty.
-- **JobPostService**: Quản lý logic liên quan đến bài đăng công việc.
-- **SkillService**: Quản lý danh sách và xử lý kỹ năng.
-- **RecommendationService**: Logic gợi ý công việc phù hợp và kỹ năng cần học.
 
 ### 4. **Giao Diện Người Dùng**
 - **Công ty**:
-  - Form tạo bài đăng công việc với các kỹ năng mong muốn.
-  - Trang quản lý danh sách các bài đăng.
+- Đây là giao diện trang chủ khi đăng nhập vào với tài khoản role company
+- ![image](https://github.com/user-attachments/assets/356c3187-b028-475a-a9b5-d31cf5d20fe8)
+
+- Ở trang của company có thể đăng tin tuyển dụng với các kỹ năng yêu cầu
+- ![image](https://github.com/user-attachments/assets/48344b5c-2257-4f55-a8d7-8748f8d837cc)
+
+- Sau khi đăng tải người dùng có thể xem các công việc công ty mình đăng ở trang quản lý tin tuyển dụng
+- ![image](https://github.com/user-attachments/assets/d7d6ed66-8777-47e6-a5b3-3c309d77aba2)
+
+- Người dùng có thể tìm các ứng cử viên phù hợp với công việc mà công ty đăng tuyển
+- ![image](https://github.com/user-attachments/assets/bee76fa9-61da-4084-8d38-e433c5059c11)
+
+- Khi click vào "Mời ứng tuyển" thì sẽ gửi mail mời đến mail của ứng cử viên phù hợp
+- ![image](https://github.com/user-attachments/assets/54f56428-e629-4b73-bca8-ceb7be409967)
+   Mail mời ứng cử viên nhận
+- ![image](https://github.com/user-attachments/assets/41847223-77eb-4626-9b13-b673e9c45784)
+
+
 
 - **Ứng viên**:
-  - Giao diện đăng nhập.
-  - Trang gợi ý danh sách công việc phù hợp với kỹ năng.
+  - Trang gợi ý danh sách công việc phù hợp với kỹ năng của ứng cử viên. Ngoài ra còn hiện các skill mà người dùng chưa có để có thể học thêm giúp phù hợp với công việc.
+  - ![image](https://github.com/user-attachments/assets/b4dc4b18-08ee-4968-bc36-3a26769e3dba)
+  - Người dùng có thể sử dụng chatbot để tìm hiểu thêm thông tin để có thể dễ tìm được việc hơn
+  - ![image](https://github.com/user-attachments/assets/80df4774-6523-48c2-ad25-65e0e9cc027b)
 
-### 5. **Tìm Kiếm và Gửi Email**
-- **Tìm ứng viên**:
-  - Công ty có thể tìm kiếm ứng viên phù hợp với yêu cầu kỹ năng của mình.
-
-- **Gửi email**:
-  - Sử dụng thư viện **JavaMailSender** để gửi email mời ứng viên tham gia ứng tuyển.
-
-### 6. **Đề Xuất Kỹ Năng**
-- Sử dụng thuật toán so sánh giữa kỹ năng yêu cầu của công việc và kỹ năng hiện tại của ứng viên để đề xuất các kỹ năng cần học thêm.
+- **Người dùng**
+  - Có thể đăng ký tài khoản với role ứng viên hoặc công ty
+  - ![image](https://github.com/user-attachments/assets/15f30d5b-06c6-4c72-a7a8-3428cf0e63e4)
+  - Tiếp theo, cần điền thông tin cá nhân của bản thân
+  - ![image](https://github.com/user-attachments/assets/c42ddf2e-685a-45d1-8f0b-5b2bf040b70b)
+  - Sau khi đăng ký thành công thì sẽ được hiển thị thông báo và có thể chuyển sang trang đăng nhập
+  - ![image](https://github.com/user-attachments/assets/af635180-92e2-4768-9055-053b43816f13)
+  - Account 46 đã được thêm thành công vào db với password được encode
+  - ![image](https://github.com/user-attachments/assets/7b485df1-d6f2-457e-9139-3d296b4688b8)
 
 ---
 
@@ -86,8 +106,8 @@ Cung cấp các chức năng chính:
 
 ### 1. **Yêu Cầu Hệ Thống**
 - Java 17
-- Maven 3.8+
-- MySQL (hoặc PostgreSQL)
+- Gradle 8.7
+- Heidi SQL
 
 ### 2. **Cài Đặt Dự Án**
 1. Clone repository:
@@ -102,7 +122,8 @@ Cung cấp các chức năng chính:
    ```
 3. Chạy ứng dụng:
    ```bash
-   mvn spring-boot:run
+   Chạy ứng dụng
+   Truy cập ứng dụng tại địa chỉ http://localhost:8080/
    ```
 
 ---
@@ -113,23 +134,22 @@ src
 ├── main
 │   ├── java
 │   │   └── com.example.labweek05
-│   │       ├── entity
-│   │       ├── repository
-│   │       ├── service
-│   │       ├── controller
+|   |         ├── backend
+│   │         │    ├── configs
+│   │         │    ├── dto
+│   │         │    ├── enums
+│   │         │    ├── ids
+│   │         │    ├── models
+│   │         │    ├── repositories
+│   │         │    └── services
+│   │         │    
+│   │         └── frontend
+│    │           └──controller
 │   └── resources
 │       ├── templates
 │       ├── static
 │       └── application.properties
 ```
-
----
-
-## Chức Năng Chính
-- Công ty đăng bài tuyển dụng với kỹ năng mong muốn.
-- Ứng viên nhận gợi ý công việc phù hợp.
-- Công ty tìm ứng viên và gửi email mời ứng tuyển.
-- Đề xuất kỹ năng học tập cho ứng viên.
 
 ---
 
