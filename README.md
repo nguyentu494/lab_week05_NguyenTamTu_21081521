@@ -56,49 +56,53 @@ Tạo các repository để thao tác với cơ sở dữ liệu:
 - **SkillRepository**: Quản lý các thao tác trên bảng Skill.
 - **CandidateSkillRepository**: Quản lý liên kết kỹ năng của ứng viên.
 - **JobSkillRepository**: Quản lý liên kết kỹ năng của công việc.
+
+
 ![image](https://github.com/user-attachments/assets/f86bc5ac-4b15-4c53-b87e-5742ec7b7879)
 
 ### 3. **Lớp Services**
 Cung cấp các chức năng chính:
+
+
 ![image](https://github.com/user-attachments/assets/0fbb1e62-930b-4444-a012-f04085507931)
 
 
 ### 4. **Giao Diện Người Dùng**
 - **Công ty**:
 - Đây là giao diện trang chủ khi đăng nhập vào với tài khoản role company
-- ![image](https://github.com/user-attachments/assets/356c3187-b028-475a-a9b5-d31cf5d20fe8)
+ ![image](https://github.com/user-attachments/assets/356c3187-b028-475a-a9b5-d31cf5d20fe8)
 
 - Ở trang của company có thể đăng tin tuyển dụng với các kỹ năng yêu cầu
-- ![image](https://github.com/user-attachments/assets/48344b5c-2257-4f55-a8d7-8748f8d837cc)
+ ![image](https://github.com/user-attachments/assets/48344b5c-2257-4f55-a8d7-8748f8d837cc)
 
 - Sau khi đăng tải người dùng có thể xem các công việc công ty mình đăng ở trang quản lý tin tuyển dụng
-- ![image](https://github.com/user-attachments/assets/d7d6ed66-8777-47e6-a5b3-3c309d77aba2)
+ ![image](https://github.com/user-attachments/assets/d7d6ed66-8777-47e6-a5b3-3c309d77aba2)
 
 - Người dùng có thể tìm các ứng cử viên phù hợp với công việc mà công ty đăng tuyển
-- ![image](https://github.com/user-attachments/assets/bee76fa9-61da-4084-8d38-e433c5059c11)
+  ![image](https://github.com/user-attachments/assets/bee76fa9-61da-4084-8d38-e433c5059c11)
 
 - Khi click vào "Mời ứng tuyển" thì sẽ gửi mail mời đến mail của ứng cử viên phù hợp
-- ![image](https://github.com/user-attachments/assets/54f56428-e629-4b73-bca8-ceb7be409967)
+  ![image](https://github.com/user-attachments/assets/54f56428-e629-4b73-bca8-ceb7be409967)
    Mail mời ứng cử viên nhận
-- ![image](https://github.com/user-attachments/assets/41847223-77eb-4626-9b13-b673e9c45784)
+  ![image](https://github.com/user-attachments/assets/41847223-77eb-4626-9b13-b673e9c45784)
 
 
 
 - **Ứng viên**:
   - Trang gợi ý danh sách công việc phù hợp với kỹ năng của ứng cử viên. Ngoài ra còn hiện các skill mà người dùng chưa có để có thể học thêm giúp phù hợp với công việc.
-  - ![image](https://github.com/user-attachments/assets/b4dc4b18-08ee-4968-bc36-3a26769e3dba)
+    ![image](https://github.com/user-attachments/assets/b4dc4b18-08ee-4968-bc36-3a26769e3dba)
   - Người dùng có thể sử dụng chatbot để tìm hiểu thêm thông tin để có thể dễ tìm được việc hơn
-  - ![image](https://github.com/user-attachments/assets/80df4774-6523-48c2-ad25-65e0e9cc027b)
+    ![image](https://github.com/user-attachments/assets/80df4774-6523-48c2-ad25-65e0e9cc027b)
 
 - **Người dùng**
   - Có thể đăng ký tài khoản với role ứng viên hoặc công ty
-  - ![image](https://github.com/user-attachments/assets/15f30d5b-06c6-4c72-a7a8-3428cf0e63e4)
+    ![image](https://github.com/user-attachments/assets/15f30d5b-06c6-4c72-a7a8-3428cf0e63e4)
   - Tiếp theo, cần điền thông tin cá nhân của bản thân
-  - ![image](https://github.com/user-attachments/assets/c42ddf2e-685a-45d1-8f0b-5b2bf040b70b)
+    ![image](https://github.com/user-attachments/assets/c42ddf2e-685a-45d1-8f0b-5b2bf040b70b)
   - Sau khi đăng ký thành công thì sẽ được hiển thị thông báo và có thể chuyển sang trang đăng nhập
-  - ![image](https://github.com/user-attachments/assets/af635180-92e2-4768-9055-053b43816f13)
+    ![image](https://github.com/user-attachments/assets/af635180-92e2-4768-9055-053b43816f13)
   - Account 46 đã được thêm thành công vào db với password được encode
-  - ![image](https://github.com/user-attachments/assets/7b485df1-d6f2-457e-9139-3d296b4688b8)
+    ![image](https://github.com/user-attachments/assets/7b485df1-d6f2-457e-9139-3d296b4688b8)
 
 ---
 
