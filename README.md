@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/49a17ae3-145c-4fe6-9543-f1f02307f824)# Lab Week 05 - Spring Boot Project
+# Lab Week 05 - Spring Boot Project
 
 # Nguyễn Tâm Tú
 
