@@ -170,7 +170,7 @@ src
 │   │         │    └── services
 │   │         │    
 │   │         └── frontend
-│    │           └──controller
+│   │           └──controller
 │   └── resources
 │       ├── templates
 │       ├── static
