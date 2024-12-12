@@ -1,5 +1,6 @@
+# Nguyễn Tâm Tú - 21081521
 
-# Lab Week05 - Spring Boot Project
+# Lab Week 05 - Spring Boot Project
 
 ## Mục Tiêu Dự Án
 Xây dựng một ứng dụng Spring Boot hỗ trợ:
@@ -91,8 +92,7 @@ Cung cấp các chức năng chính:
 ### 2. **Cài Đặt Dự Án**
 1. Clone repository:
    ```bash
-   git clone <repository-url>
-   cd lab-week05
+   git clone https://github.com/nguyentu494/lab_week05_NguyenTamTu_21081521.git
    ```
 2. Cấu hình database trong file `application.properties`:
    ```properties
