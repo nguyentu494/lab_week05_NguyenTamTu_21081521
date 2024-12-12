@@ -77,13 +77,13 @@ Cung cấp các chức năng chính:
 ### 5. **Giao Diện Người Dùng**
 - **Công ty**:
 - Đây là giao diện trang chủ khi đăng nhập vào với tài khoản role company
- ![image](https://github.com/user-attachments/assets/356c3187-b028-475a-a9b5-d31cf5d20fe8)
+  ![image](https://github.com/user-attachments/assets/8465f025-c27b-4529-b068-48123a09eacc)
 
 - Ở trang của company có thể đăng tin tuyển dụng với các kỹ năng yêu cầu
- ![image](https://github.com/user-attachments/assets/48344b5c-2257-4f55-a8d7-8748f8d837cc)
+  ![image](https://github.com/user-attachments/assets/48344b5c-2257-4f55-a8d7-8748f8d837cc)
 
 - Sau khi đăng tải người dùng có thể xem các công việc công ty mình đăng ở trang quản lý tin tuyển dụng
- ![image](https://github.com/user-attachments/assets/d7d6ed66-8777-47e6-a5b3-3c309d77aba2)
+  ![image](https://github.com/user-attachments/assets/09ae2f2f-3150-44b8-9097-d0ecd044d1f7)
 
 - Người dùng có thể tìm các ứng cử viên phù hợp với công việc mà công ty đăng tuyển
   ![image](https://github.com/user-attachments/assets/bee76fa9-61da-4084-8d38-e433c5059c11)
