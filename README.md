@@ -46,7 +46,12 @@ Sơ đồ lớp:
 #### Ghi chú:
 Sử dụng các mối quan hệ **@OneToMany**, **@ManyToOne**, và **@ManyToMany** để liên kết các thực thể.
 
-### 2. **Repositories Interface**
+### 2. **Cấu hình Security**
+
+![image](https://github.com/user-attachments/assets/923eab7b-fe39-4fb7-aec1-3ef900d7d777)
+
+
+### 3. **Repositories Interface**
 Tạo các repository để thao tác với cơ sở dữ liệu:
 
 - **AddressRepository**: Quản lý các thao tác trên bảng Address.
@@ -62,14 +67,14 @@ Tạo các repository để thao tác với cơ sở dữ liệu:
 
 ![image](https://github.com/user-attachments/assets/f86bc5ac-4b15-4c53-b87e-5742ec7b7879)
 
-### 3. **Lớp Services**
+### 4. **Lớp Services**
 Cung cấp các chức năng chính:
 
 
 ![image](https://github.com/user-attachments/assets/0fbb1e62-930b-4444-a012-f04085507931)
 
 
-### 4. **Giao Diện Người Dùng**
+### 5. **Giao Diện Người Dùng**
 - **Công ty**:
 - Đây là giao diện trang chủ khi đăng nhập vào với tài khoản role company
  ![image](https://github.com/user-attachments/assets/356c3187-b028-475a-a9b5-d31cf5d20fe8)
