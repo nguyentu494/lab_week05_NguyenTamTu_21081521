@@ -122,9 +122,29 @@ Cung cấp các chức năng chính:
    ```
 2. Cấu hình database trong file `application.properties`:
    ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/lab_week05
-   spring.datasource.username=<username>
-   spring.datasource.password=<password>
+   spring.application.name=lab_week_05_NguyenTamTu_21081521
+
+   spring.config.import=optional:file:.env[.properties]
+
+   spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+   spring.datasource.url=jdbc:mariadb://localhost:3306/works?createDatabaseIfNotExist=true
+   spring.datasource.username=${user_my_sql}
+   spring.datasource.password=${password_my_sql}
+   
+   spring.ai.mistralai.api-key=${api_key}
+   spring.ai.mistralai.chat.options.model=mistral-small
+   spring.ai.mistralai.chat.options.temperature=0.7
+   
+   spring.jpa.show-sql=true
+   spring.jpa.generate-ddl=true
+   spring.jpa.hibernate.ddl-auto=update
+   
+   spring.mail.host=smtp.gmail.com
+   spring.mail.port=587
+   spring.mail.username=${mail}
+   spring.mail.password=${mailpass}
+   spring.mail.properties.mail.smtp.auth=true
+   spring.mail.properties.mail.smtp.starttls.enable=true
    ```
 3. Chạy ứng dụng:
    ```bash
