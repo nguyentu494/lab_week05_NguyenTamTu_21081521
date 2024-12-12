@@ -38,6 +38,8 @@ Khi thực thi, ứng dụng sẽ tạo ra các bảng trong cơ sở dữ liệ
 - **JobSkill**: Liên kết công việc với các kỹ năng yêu cầu.
 
 Sơ đồ lớp:
+
+
 ![image](https://github.com/user-attachments/assets/d67b5325-5577-4fea-8cea-1e1fc6fdc44b)
 
 
