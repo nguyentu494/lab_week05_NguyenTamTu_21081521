@@ -30,7 +30,7 @@ Xây dựng một ứng dụng Spring Boot hỗ trợ:
 2. **Ứng viên**:
    - Nhận gợi ý các công việc phù hợp với kỹ năng hiện có.
    - Xem danh sách kỹ năng chưa đầy đủ để nâng cao cơ hội tuyển dụng.
-   - Sử dụng chatbot để hỏ trợ tìm hiểu thông tin tuyển dụng.
+   - Sử dụng chatbot để hỗ trợ tìm hiểu thông tin tuyển dụng.
 
 3. **Người dùng**:
    - Đăng ký tài khoản với vai trò công ty hoặc ứng viên.
@@ -65,10 +65,22 @@ Cung cấp các chức năng:
 - Kết nối repository và controller.
 
 ### 5. **Giao Diện**
-- Sử dụng Thymeleaf để tạo giao diện tương tác.
-- Trang công ty: Quản lý tin tuyển dụng, tìm kiếm ứng viên.
-- Trang ứng viên: Xem gợi ý công việc phù hợp.
-- Trang đăng nhập/đăng ký: Hỗ trợ vai trò linh hoạt.
+
+Giao diện được xây dựng bằng **Thymeleaf** để đảm bảo tính tương tác và thân thiện với người dùng. Các trang chính bao gồm:
+
+- **Trang Công Ty**:
+  - **Quản lý tin tuyển dụng**: Công ty có thể đăng tin tuyển dụng với các kỹ năng yêu cầu và theo dõi trạng thái của các tin đăng.
+  - **Tìm kiếm ứng viên**: Hiển thị danh sách ứng viên phù hợp với kỹ năng của công việc đã đăng.
+  - **Gửi email mời ứng tuyển**: Với một cú nhấp chuột, công ty có thể gửi email mời ứng viên tham gia ứng tuyển.
+
+- **Trang Ứng Viên**:
+  - **Gợi ý công việc**: Hiển thị danh sách công việc phù hợp dựa trên kỹ năng hiện có của ứng viên.
+  - **Học thêm kỹ năng**: Đưa ra danh sách kỹ năng cần học để tăng cơ hội được tuyển dụng.
+  - **Chatbot hỗ trợ**: Ứng viên có thể tìm hiểu thêm thông tin và nhận gợi ý từ chatbot tích hợp.
+
+- **Trang Đăng Nhập/Đăng Ký**:
+  - **Đăng ký linh hoạt**: Hỗ trợ đăng ký tài khoản với vai trò ứng viên hoặc công ty.
+  - **Quy trình rõ ràng**: Người dùng điền thông tin cá nhân sau khi đăng ký và nhận thông báo xác nhận thành công.
 
 ---
 
