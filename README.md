@@ -1,7 +1,12 @@
-
+![image](https://github.com/user-attachments/assets/75de7d17-ef65-4c1b-9ed9-432c2e00bd70)![image](https://github.com/user-attachments/assets/7c04f605-a38d-4623-ad61-db3e3dc1810b)![image](https://github.com/user-attachments/assets/adc11c59-e113-4b8d-a4b8-6d24c7dc485b)![image](https://github.com/user-attachments/assets/b1240508-fd0a-46ed-a6e4-a243d3594bc2)
 # Lab Week 05 - Spring Boot Project
 
-## **Nguyễn Tâm Tú**
+---
+Thông tin
+
+## **Họ tên**: Nguyễn Tâm Tú
+## **Mã số sinh viên**: 21081521
+## **GVHD**: Võ Văn Hải
 
 ---
 
@@ -39,7 +44,7 @@ Xây dựng một ứng dụng Spring Boot hỗ trợ:
 
 ---
 
-## **Yêu Cầu Kỹ Thuật**
+## **Nội dung**
 
 ### 1. **Cơ Sở Dữ Liệu**
 - **Entities**:
@@ -56,7 +61,7 @@ Xây dựng một ứng dụng Spring Boot hỗ trợ:
 Tạo repository cho từng bảng để thao tác với cơ sở dữ liệu:
 - AddressRepository, AccountRepository, CandidateRepository, ExperienceRepository, CompanyRepository, JobRepository, SkillRepository, CandidateSkillRepository, JobSkillRepository.
 
-### 3. **Cài Đặt Security**
+### 3. **Phân quyền đăng nhập với Security**
 Cấu hình bảo mật với Spring Security để phân quyền vai trò (công ty hoặc ứng viên).
 
 ### 4. **Service Layer**
@@ -64,23 +69,62 @@ Cung cấp các chức năng:
 - Xử lý logic tìm kiếm, đề xuất, gửi email mời tuyển.
 - Kết nối repository và controller.
 
-### 5. **Giao Diện**
+---
+
+### **Demo**
 
 Giao diện được xây dựng bằng **Thymeleaf** để đảm bảo tính tương tác và thân thiện với người dùng. Các trang chính bao gồm:
 
 - **Trang Công Ty**:
-  - **Quản lý tin tuyển dụng**: Công ty có thể đăng tin tuyển dụng với các kỹ năng yêu cầu và theo dõi trạng thái của các tin đăng.
+  - **Trang chủ**: Công ty có thể xem các bài đăng vừa được đăng tải của các công ty
+  - 
+    ![image](https://github.com/user-attachments/assets/28d8382e-b566-458f-a038-33a099d50c7d)
+
+  - **Quản lý tin tuyển dụng**: Công ty có thể xem các bài đăng tuyển dụng của công ty đã đăng.
+    
+![image](https://github.com/user-attachments/assets/809ceb92-60c7-493c-bae9-5d140e3627c0)
+
+  - **Đăng tin tuyển dụng**: Công ty có thể đăng bài tuyển dụng để tìm kiếm ứng viên phù hợp
+
+    ![image](https://github.com/user-attachments/assets/b5b23280-c697-4a41-87a6-1bd361698b02)
+
+   ![image](https://github.com/user-attachments/assets/4becd379-b71c-4a67-b847-ade7e6b0c8ef)
+
+
   - **Tìm kiếm ứng viên**: Hiển thị danh sách ứng viên phù hợp với kỹ năng của công việc đã đăng.
+       
+    ![image](https://github.com/user-attachments/assets/6c7facad-718d-44cb-9a39-d46991a54777)
+
   - **Gửi email mời ứng tuyển**: Với một cú nhấp chuột, công ty có thể gửi email mời ứng viên tham gia ứng tuyển.
 
-- **Trang Ứng Viên**:
+    ![image](https://github.com/user-attachments/assets/6630eaf2-8f3a-44ba-9d0a-c5f668f39f94)
+
+    ![image](https://github.com/user-attachments/assets/d818351e-187b-4add-80f0-5694b0bd1f4a)
+
+- **Trang Ứng Viên**: Tiếp theo sẽ đăng nhập bằng account candidate
   - **Gợi ý công việc**: Hiển thị danh sách công việc phù hợp dựa trên kỹ năng hiện có của ứng viên.
-  - **Học thêm kỹ năng**: Đưa ra danh sách kỹ năng cần học để tăng cơ hội được tuyển dụng.
+
+    ![image](https://github.com/user-attachments/assets/90d57b3f-9f61-4dcf-87cd-bdf0878613dd)
+
+  - **Học thêm kỹ năng**: Trong công việc được gợi ý sẽ có thêm các skill phù hợp, đồng thời sẽ đề cập các skill còn thiếu để học thêm phù hợp với công việc
+ 
+  ![image](https://github.com/user-attachments/assets/e0f363c2-ea8f-4b0d-9345-82bd549108bf)
+
+
   - **Chatbot hỗ trợ**: Ứng viên có thể tìm hiểu thêm thông tin và nhận gợi ý từ chatbot tích hợp.
+ 
+    ![image](https://github.com/user-attachments/assets/34e28ed9-cd16-447d-84b7-b12d704952cf)
 
 - **Trang Đăng Nhập/Đăng Ký**:
   - **Đăng ký linh hoạt**: Hỗ trợ đăng ký tài khoản với vai trò ứng viên hoặc công ty.
+
+![image](https://github.com/user-attachments/assets/40d62446-b137-4740-b863-ec70fa441a38)
+
   - **Quy trình rõ ràng**: Người dùng điền thông tin cá nhân sau khi đăng ký và nhận thông báo xác nhận thành công.
+
+![image](https://github.com/user-attachments/assets/a81e2e2e-4d0b-463d-a937-4d586db3f11d)
+
+![image](https://github.com/user-attachments/assets/3b525afe-0126-4a8e-be77-68cc4836d146)
 
 ---
 
@@ -105,9 +149,6 @@ Giao diện được xây dựng bằng **Thymeleaf** để đảm bảo tính t
    spring.mail.password=${mailpass}
    ```
 3. Chạy ứng dụng:
-   ```bash
-   ./gradlew bootRun
-   ```
    Truy cập tại: `http://localhost:8080/`
 
 ---
