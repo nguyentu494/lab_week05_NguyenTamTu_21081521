@@ -3,11 +3,13 @@
 
 ---
 
-## **Thông tin**
+### **Thông tin**
 
-## **Họ tên**: Nguyễn Tâm Tú
-## **Mã số sinh viên**: 21081521
-## **GVHD**: Võ Văn Hải
+ **Họ tên**: Nguyễn Tâm Tú
+ 
+ **Mã số sinh viên**: 21081521
+ 
+ **GVHD**: Võ Văn Hải
 
 ---
 
