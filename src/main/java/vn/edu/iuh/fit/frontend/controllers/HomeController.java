@@ -46,7 +46,7 @@ public class HomeController {
 
             if (principal instanceof UserDetails) {
                 UserDetails userDetails = (UserDetails) principal;
-                System.out.println(principal);
+
 
                 // Lấy các thông tin cơ bản
                 String username = userDetails.getUsername();
