@@ -3,7 +3,7 @@
 
 ---
 
-### **Thông tin**
+# **Thông tin**
 
  **Họ tên**: Nguyễn Tâm Tú
  
