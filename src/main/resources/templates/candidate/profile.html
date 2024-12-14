@@ -26,14 +26,13 @@
             </div>
             <!-- User Dropdown -->
             <div class="dropdown mr-3" sec:authorize="isAuthenticated()">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                    User
+                <button class="btn btn-light dropdown-toggle text-primary" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle me-2 ml-2" th:text="${candidate.getFullName()}"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
                     <li><a class="dropdown-item" href="/candidates">Trang chủ</a></li>
-                    <li><a class="dropdown-item" href="/candidate/profile">Thông tin cá nhân</a></li>
-                    <li><a class="dropdown-item" href="/candidate/hires">Trang tuyển dụng</a></li>
+                    <li><a class="dropdown-item" href="/candidates/profile">Thông tin cá nhân</a></li>
+                    <li><a class="dropdown-item" href="/candidates/hires">Trang tuyển dụng</a></li>
                 </ul>
             </div>
 
@@ -49,7 +48,7 @@
 <!-- Profile Section -->
 <section id="profile" class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-4">User Profile</h2>
+        <h2 class="text-center mb-4">Thông tin người dùng</h2>
         <div class="row">
             <div class="col-md-4">
                 <div class="card shadow-sm">
@@ -61,11 +60,11 @@
                             <span th:text="${candidate.email}"></span>
                         </div>
                         <div class="d-flex align-items-center mb-2 justify-content-center">
-                            <h5 class="me-2 mb-0">Phone:</h5>
+                            <h5 class="me-2 mb-0">Số điện thoại:</h5>
                             <span th:text="${candidate.phone}"></span>
                         </div>
                         <div class="d-flex align-items-center mb-2 justify-content-center">
-                            <h5 class="me-2 mb-0">Date of birth:</h5>
+                            <h5 class="me-2 mb-0">Ngày sinh:</h5>
                             <span th:text="${candidate.dob}"></span>
                         </div>
                     </div>
@@ -74,10 +73,10 @@
             <div class="col-md-8">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">Address</h5>
-                        <p th:text="${candidate.address.city}">Address Details</p>
+                        <h5 class="card-title">Địa chỉ</h5>
+                        <p th:text="${candidate.address.toString()}">Address Details</p>
                         <hr>
-                        <h5 class="card-title">Skills</h5>
+                        <h5 class="card-title">Kỹ năng hiện có: </h5>
                         <ul class="list-group" th:each="skill : ${candidate.candidateSkills}">
                             <li class="list-group-item mt-3" th:text="${skill.skill.skillName} + ' - ' +  ${skill.skillLevel}">Skill Name</li>
                         </ul>

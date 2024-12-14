@@ -26,14 +26,13 @@
             </div>
             <!-- User Dropdown -->
             <div class="dropdown mr-3" sec:authorize="isAuthenticated()">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                    User
+                <button class="btn btn-light dropdown-toggle text-primary" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle me-2 ml-2" th:text="${candidate.getFullName()}"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
                     <li><a class="dropdown-item" href="/candidates">Trang chủ</a></li>
-                    <li><a class="dropdown-item" href="/candidate/profile">Thông tin cá nhân</a></li>
-                    <li><a class="dropdown-item" href="/candidate/hires">Trang tuyển dụng</a></li>
+                    <li><a class="dropdown-item" href="/candidates/profile">Thông tin cá nhân</a></li>
+                    <li><a class="dropdown-item" href="/candidates/hires">Trang tuyển dụng</a></li>
                 </ul>
             </div>
 
@@ -49,7 +48,7 @@
 <!-- Job Listings Section -->
 <section id="jobs" class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-4">Suggestion Jobs</h2>
+        <h2 class="text-center mb-4">Công việc đề xuất</h2>
         <div class="row">
             <!-- Lặp qua danh sách các công việc từ jobPage -->
             <div class="col-md-4" th:each="job : ${jobPage}">
@@ -63,28 +62,29 @@
                             <strong>Company:</strong> <span th:text="${job.companyName}">Company Name</span>
                         </p>
                         <p class="card-text">
-                            <strong>Match:</strong> <span class="badge bg-success" th:text="${job.matchingSkills} + ' skills'">Skills</span>
+                            <strong>Phù hợp:</strong> <span class="badge bg-success" th:text="${job.matchingSkills} + ' skills'">Skills</span>
                         </p>
                         <div th:if="${job.getMissSkills()}">
                             <div class="alert alert-warning p-2" role="alert">
-                                <strong>Missing skills:</strong>
+                                <strong>Kỹ năng còn thiếu:</strong>
                                 <span th:each="skill : ${job.getMissSkills()}">
-                            <span class="badge bg-danger me-1" th:text="${skill}"></span>
-                        </span>
+                        <span class="badge bg-danger me-1" th:text="${skill}"></span>
+                    </span>
                             </div>
                         </div>
                         <div th:unless="${job.getMissSkills()}">
                             <div class="alert alert-success p-2" role="alert">
-                                <strong>All skills matched!</strong>
+                                <strong>Phù hợp công việc</strong>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary w-100 mt-3">Apply Now</a>
+                        <a href="#" class="btn btn-primary w-100 mt-3">Ứng tuyển ngay</a>
+                        <a th:href="@{'/candidates/detail-job?job='+${job.getId()}}" class="btn btn-secondary w-100 mt-2">Xem chi tiết</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Pagination -->
+            <!-- Pagination -->
         <nav aria-label="Job Pagination">
             <ul class="pagination justify-content-center mt-4">
                 <!-- Nút Previous -->

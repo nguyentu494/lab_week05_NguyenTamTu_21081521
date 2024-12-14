@@ -10,7 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString
 @Table(name = "address")
 public class Address {
     @Id
@@ -41,4 +40,40 @@ public class Address {
         this.number = number;
         this.zipcode = zipcode;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder addressBuilder = new StringBuilder();
+
+        if (street != null && !street.isEmpty()) {
+            addressBuilder.append(street);
+        }
+        if (number != null && !number.isEmpty()) {
+            if (addressBuilder.length() > 0) {
+                addressBuilder.append(", ");
+            }
+            addressBuilder.append("No. ").append(number);
+        }
+        if (city != null && !city.isEmpty()) {
+            if (addressBuilder.length() > 0) {
+                addressBuilder.append(", ");
+            }
+            addressBuilder.append(city);
+        }
+        if (zipcode != null && !zipcode.isEmpty()) {
+            if (addressBuilder.length() > 0) {
+                addressBuilder.append(", ");
+            }
+            addressBuilder.append(zipcode);
+        }
+        if (country != null) {
+            if (addressBuilder.length() > 0) {
+                addressBuilder.append(", ");
+            }
+            addressBuilder.append(country.name());
+        }
+
+        return addressBuilder.toString();
+    }
+
 }

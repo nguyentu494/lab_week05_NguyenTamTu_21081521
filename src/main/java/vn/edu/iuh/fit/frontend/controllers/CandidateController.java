@@ -44,8 +44,12 @@ public class CandidateController {
     public ModelAndView getCandidates(@RequestParam(name = "page") Optional<Integer> page, Authentication authentication) {
         ModelAndView mav = new ModelAndView();
         int currentPage = page.orElse(1);
+
+        Candidate candidate = candidateService.findByAccount_Username(authentication.getName());
+        mav.addObject("candidate", candidate);
         Pageable pageable = PageRequest.of(currentPage-1, 6);
         Page<JobSuggestionDTO> jobPage = jobService.findJobsByUsername(pageable, authentication.getName());
+
         mav.addObject("jobPage", jobPage);
         mav.addObject("totalPages", jobPage.getTotalPages());
         mav.addObject("page", currentPage);
@@ -63,7 +67,7 @@ public class CandidateController {
         return mav;
     }
 
-    @GetMapping("/candidate/profile")
+    @GetMapping("/candidates/profile")
     public ModelAndView getCandidate(Principal principal) {
         ModelAndView mav = new ModelAndView();
 
@@ -75,12 +79,12 @@ public class CandidateController {
         return mav;
     }
 
-    @GetMapping("/candidate/hires")
+    @GetMapping("/candidates/hires")
     public ModelAndView getHires( @RequestParam("page")Optional<Integer> page,
                                   @RequestParam("size")Optional<Integer> size, Principal principal) {
         ModelAndView mav = new ModelAndView();
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(12);
+        int pageSize = size.orElse(9);
 
         Candidate candidate = candidateService.findByAccount_Username(principal.getName());
         mav.addObject("candidate", candidate);
@@ -93,6 +97,17 @@ public class CandidateController {
         mav.addObject("jobs", jobPage);
         mav.addObject("page", currentPage);
         mav.addObject("totalPages", totalPages);
+        return mav;
+    }
+
+    @GetMapping("/candidates/detail-job")
+    public ModelAndView getDetailJob(@RequestParam("job") long id, Authentication authentication) {
+        ModelAndView mav = new ModelAndView();
+        Job job = jobService.findById(id);
+        Candidate candidate = candidateService.findByAccount_Username(authentication.getName());
+        mav.addObject("candidate", candidate);
+        mav.addObject("job", job);
+        mav.setViewName("candidate/detail-job");
         return mav;
     }
 }

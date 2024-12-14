@@ -117,4 +117,9 @@ public class JobServiceImpl implements JobService {
         Company company = companyRepository.findCompanyByAccount_Username(username);
         return jobRepository.findJobByCompany_Email(pageable, company.getEmail());
     }
+
+    @Override
+    public Job findById(long id) {
+        return jobRepository.findJobById(id);
+    }
 }

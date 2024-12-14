@@ -32,5 +32,6 @@ public interface JobService {
     Job save(CreateJobDTO job, Principal principal);
     Page<JobSuggestionDTO> findJobsByUsername(Pageable pageable, String username);
     Page<Job> findJobsByUser(Pageable pageable, String username);
+    Job findById(long id);
 
 }
