@@ -1,5 +1,5 @@
 /*
- * @ (#) CandidateMatchDto.java   1.0     05/12/2024
+ * @ (#) MissJobSkillDTO.java   1.0     08/12/2024
  *
  * Copyright (c) 2024 IUH. All rights reserved
  */
@@ -9,23 +9,18 @@ package vn.edu.iuh.fit.backend.dto;
 /*
  * @description:
  * @author: Tuss Nguyen
- * @date: 05/12/2024
+ * @date: 08/12/2024
  * @version: 1.0
  */
 
 import lombok.*;
-import vn.edu.iuh.fit.backend.models.Skill;
-
-import java.util.List;
 
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class CandidateMatchDto {
-    private String fullName;
-    private String email;
+public class MissSkillDTO {
     private long id;
-    private long matchSkill;
+    private String skillName;
 }

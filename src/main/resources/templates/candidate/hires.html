@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản Lý Tuyển Dụng</title>
+    <!-- Link Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+        .navbar .btn {
+            margin-left: 10px;
+        }
+        .card {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+<!-- Navbar -->
+<div th:fragment="header" class="bg-primary text-white">
+    <div class="container d-flex justify-content-between align-items-center py-3">
+        <!-- Logo -->
+        <div class="logo fs-3 fw-bold">
+            Trang Chủ
+        </div>
+
+        <!-- Auth Links -->
+        <div class="d-flex align-items-center">
+            <div class="auth gap-2" sec:authorize="!isAuthenticated()">
+                <a href="/login" class="btn btn-light btn-sm">Đăng Nhập</a>
+                <a href="/register" class="btn btn-light btn-sm">Đăng Ký</a>
+            </div>
+            <!-- User Dropdown -->
+            <div class="dropdown mr-3" sec:authorize="isAuthenticated()">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    User
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="/candidates">Trang chủ</a></li>
+                    <li><a class="dropdown-item" href="/candidate/profile">Thông tin cá nhân</a></li>
+                    <li><a class="dropdown-item" href="/candidate/hires">Trang tuyển dụng</a></li>
+                </ul>
+            </div>
+
+            <!-- Logout Button -->
+            <form sec:authorize="isAuthenticated()" method="post" action="/logout" class="ms-3">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button type="submit" class="btn btn-danger btn-sm">Log out</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container my-5">
+    <h4 class="mb-4 text-center">Danh Sách Tin Tuyển Dụng</h4>
+
+    <div class="row">
+        <!-- Lặp qua danh sách các job -->
+        <div th:each="job : ${jobs}" class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Hiển thị tiêu đề công việc -->
+                    <h5 class="card-title" th:text="${job.getJobName()}">Tên Công Việc</h5>
+                    <h6 class="text-muted" th:text="${job.getCompany().getCompName()}">Tên công ty</h6>
+                    <!-- Kỹ năng -->
+                    <div class="mt-2">
+                        <span th:each="skill : ${job.getJobSkills()}"
+                              class="badge badge-primary mr-1"
+                              th:text="${skill.getSkill().getSkillName()} + ' - ' + ${skill.getSkillLevel().name()}">
+                            Kỹ Năng
+                        </span>
+                    </div>
+                    <!-- Nút Apply Job -->
+                    <a href="#" class="btn btn-primary btn-block mt-3" th:href="@{'/apply/' + ${job.getId()}}">Ứng Tuyển</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Job Pagination" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <!-- Nút Previous -->
+            <li class="page-item" th:classappend="${page > 1} ? '' : 'disabled'">
+                <a class="page-link" th:href="@{'/candidate/hires?page=' + (${page} - 1)}" aria-label="Previous">
+                    &laquo;
+                </a>
+            </li>
+
+            <!-- Hiển thị số trang -->
+            <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${i == page} ? 'active' : ''">
+                <a class="page-link" th:href="@{'/candidate/hires?page=' + ${i}}" th:text="${i}"></a>
+            </li>
+
+            <!-- Nút Next -->
+            <li class="page-item" th:classappend="${page < totalPages} ? '' : 'disabled'">
+                <a class="page-link" th:href="@{'/candidate/hires?page=' + (${page} + 1)}" aria-label="Next">
+                    &raquo;
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Link Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

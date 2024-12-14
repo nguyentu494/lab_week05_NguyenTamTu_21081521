@@ -5,7 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Quản Lý Tuyển Dụng</title>
     <!-- Link Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .card-custom {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge-skill {
+            padding: 0.5rem 0.75rem;
+            margin: 0.25rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            text-transform: capitalize;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #007BFF;
+            border-color: #007BFF;
+        }
+
+        .pagination .page-item .page-link {
+            color: #007BFF;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #6c757d;
+        }
+
+        .main-content-header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
 
@@ -13,27 +51,29 @@
 <header th:replace="fragments/header :: header"></header>
 
 <!-- Main Content -->
-<div class="container-fluid">
-
+<div class="container-fluid my-4">
     <div class="row">
         <div th:replace="fragments/sidebar :: sidebar"></div>
 
-
         <!-- Main Content Area -->
         <div class="col-md-9">
-            <h4 class="my-4">Danh Sách Tin Tuyển Dụng</h4>
-            <div class="row">
+            <!-- Header Section -->
+            <div class="main-content-header mb-4">
+                <h4 class="m-0">Danh Sách Tin Tuyển Dụng</h4>
+            </div>
+
+            <!-- Job Cards -->
+            <div class="row g-3">
                 <!-- Lặp qua danh sách các job -->
-                <div th:each="job : ${jobs}" class="col-md-4">
-                    <div class="card mb-4">
+                <div th:each="job : ${jobs}" class="col-md-6 col-lg-4">
+                    <div class="card card-custom h-100">
                         <div class="card-body">
-                            <!-- Hiển thị tiêu đề công việc -->
-                            <h5 class="card-title" th:text="${job.getJobName()}">Tên Công Việc</h5>
-                            <h6 class="text-muted" th:text="${job.getCompany().getCompName()}">Tên công ty</h6>
-                            <!-- Kỹ năng -->
-                            <div>
-                                <span th:each="skill : ${job.getJobSkills()}"
-                                      class="badge badge-primary me-1"
+                            <h5 class="card-title text-center" th:text="${job.getJobName()}">Tên Công Việc</h5>
+                            <h6 class="text-muted text-center" th:text="${job.getCompany().getCompName()}">Tên công ty</h6>
+                            <div class="d-flex flex-wrap justify-content-center mt-3">
+                                <span th:each="skill, iterStat : ${job.getJobSkills()}"
+                                      th:style="'background-color: ' + ${colors[iterStat.index % colors.size()]} + '; color: #fff;'"
+                                      class="badge-skill"
                                       th:text="${skill.getSkill().getSkillName()} + ' - ' + ${skill.getSkillLevel().name()}">
                                     Kỹ Năng
                                 </span>
@@ -44,7 +84,7 @@
             </div>
 
             <!-- Pagination -->
-            <nav aria-label="Job Pagination">
+            <nav aria-label="Job Pagination" class="mt-4">
                 <ul class="pagination justify-content-center">
                     <!-- Nút Previous -->
                     <li class="page-item" th:classappend="${page > 1} ? '' : 'disabled'">
@@ -52,32 +92,48 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
+                    <th:block th:unless="${status}">
+                        <!-- Hiển thị số trang -->
+                        <li class="page-item"
+                            th:each="i : ${#numbers.sequence(1, totalPages)}"
+                            th:classappend="${i == page} ? 'active' : ''">
+                            <a class="page-link" th:href="@{'/companies?page=' + ${i}}" th:text="${i}">1</a>
+                        </li>
 
-                    <!-- Hiển thị số trang -->
-                    <li class="page-item"
-                        th:each="i : ${#numbers.sequence(1, totalPages)}"
-                        th:classappend="${i == page} ? 'active' : ''">
-                        <a class="page-link" th:href="@{'/companies?page=' + ${i}}" th:text="${i}">1</a>
-                    </li>
+                        <!-- Nút Next -->
+                        <li class="page-item" th:classappend="${page < totalPages} ? '' : 'disabled'">
+                            <a class="page-link" th:href="@{'/companies?page=' + (${page})}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </th:block>
 
-                    <!-- Nút Next -->
-                    <li class="page-item" th:classappend="${page < totalPages} ? '' : 'disabled'">
-                        <a class="page-link" th:href="@{'/companies?page=' + (${page})}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+                    <th:block th:if="${status}">
+                        <!-- Hiển thị số trang -->
+                        <li class="page-item"
+                            th:each="i : ${#numbers.sequence(1, totalPages)}"
+                            th:classappend="${i == page} ? 'active' : ''">
+                            <a class="page-link" th:href="@{'manage?page=' + ${i}}" th:text="${i}">1</a>
+                        </li>
+
+                        <!-- Nút Next -->
+                        <li class="page-item" th:classappend="${page < totalPages} ? '' : 'disabled'">
+                            <a class="page-link" th:href="@{'manage?page=' + (${page})}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </th:block>
+
                 </ul>
             </nav>
         </div>
     </div>
-    <footer th:replace="fragments/footer :: footer"></footer>
-
 </div>
 
 <!-- Link Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

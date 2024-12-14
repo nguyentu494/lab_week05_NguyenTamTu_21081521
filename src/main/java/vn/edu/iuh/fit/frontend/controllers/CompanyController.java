@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.edu.iuh.fit.backend.dto.CandidateMatchDto;
+import vn.edu.iuh.fit.backend.dto.CreateJobDTO;
 import vn.edu.iuh.fit.backend.dto.RegisterCompanyDTO;
 import vn.edu.iuh.fit.backend.enums.Role;
 import vn.edu.iuh.fit.backend.enums.SkillLevel;
@@ -34,6 +35,7 @@ import vn.edu.iuh.fit.backend.models.*;
 import vn.edu.iuh.fit.backend.services.*;
 import vn.edu.iuh.fit.frontend.models.CompanyModel;
 
+import java.security.Principal;
 import java.util.*;
 
 @Controller
@@ -71,6 +73,10 @@ public class CompanyController {
         Page<Job> jobPage =  jobService.findAll(currentPage, pageSize, "id", "desc");
         int totalPages = jobPage.getTotalPages();
 
+        List<String> colors = List.of("#007BFF", "#6C757D", "#28A745", "#DC3545", "#FFC107", "#17A2B8");
+
+        mav.addObject("colors", colors);
+
         mav.addObject("company", company);
         mav.addObject("jobs", jobPage);
         mav.addObject("page", currentPage);
@@ -91,8 +97,7 @@ public class CompanyController {
         }
         mav.addObject("skillLevel", skillLevel);
         // Tạo đối tượng Job mới với danh sách kỹ năng trống
-        Job job = new Job();
-        job.setJobSkills(new ArrayList<>());
+        CreateJobDTO job = new CreateJobDTO();
         mav.addObject("job", job);
 
         return mav;
@@ -100,34 +105,17 @@ public class CompanyController {
 
 
     @PostMapping("add-job")
-    public ModelAndView addJob(@ModelAttribute Job job, @RequestParam("selSkill1") List<Long> skills, @RequestParam("selSkillLevel1") List<String> skillLevels, Authentication authentication) {
+    public ModelAndView addJob(@ModelAttribute CreateJobDTO job, Principal principal) {
         ModelAndView mav = new ModelAndView("redirect:/companies");
+        RegisterCompanyDTO company = companyService.findCompanyDTOByUsername(principal.getName());
 
-        RegisterCompanyDTO company = companyService.findCompanyDTOByUsername(authentication.getName());
-
-        JobSkill jobSkill = new JobSkill();
-//        System.out.println(company);
-//        job.setCompany(company);
-        jobService.save(job);
-//        List<JobSkill> jobSkills = new ArrayList<>();
-        skills.forEach(skillId -> {
-            Skill skill = skillService.findById(skillId);
-            SkillLevel skillLevel = SkillLevel.valueOf(skillLevels.get(skills.indexOf(skillId)));
-
-            jobSkill.setSkill(skill);
-            jobSkill.setSkillLevel(skillLevel);
-            jobSkill.setJob(job);
-            jobSkill.setId(new JobSkillId(job.getId(), skill.getId()));
-
-            jobSkillService.save(jobSkill);
-        });
-
+        jobService.save(job, principal);
 
         Page<Job> jobPage =  jobService.findAll(1, 12, "id", "desc");
         int totalPages = jobPage.getTotalPages();
 
-
         mav.addObject("company", company);
+
         mav.addObject("jobs", jobPage);
         mav.addObject("page", 1);
         mav.addObject("totalPages", totalPages);
@@ -186,6 +174,41 @@ public class CompanyController {
 
 
         redirectAttributes.addFlashAttribute("success", "Invitation sent to " + email + " successfully!");
+        return mav;
+    }
+
+    @GetMapping("manage")
+    public ModelAndView ManageCompany(@RequestParam("page")Optional<Integer> page,
+                                     @RequestParam("size")Optional<Integer> size, Authentication authentication){
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(3);
+//        Page<Job> jobPage = jobService.findAll(PageRequest.of(currentPage - 1, pageSize));
+
+//        Company company = (Company) session.getAttribute("account");
+        RegisterCompanyDTO company = companyService.findCompanyDTOByUsername(authentication.getName());
+//        System.out.println(company);
+        ModelAndView mav = new ModelAndView("companies/companies");
+
+        Page<Job> jobPage =  jobService.findJobByCompanyEmail(PageRequest.of(currentPage - 1, pageSize), company.getEmail());
+        int totalPages = jobPage.getTotalPages();
+        List<String> colors = List.of("#007BFF", "#6C757D", "#28A745", "#DC3545", "#FFC107", "#17A2B8");
+
+        mav.addObject("colors", colors);
+
+        mav.addObject("status", "manage");
+        mav.addObject("company", company);
+        mav.addObject("jobs", jobPage);
+        mav.addObject("page", currentPage);
+        mav.addObject("totalPages", totalPages);
+        return mav;
+    }
+
+    @GetMapping("profile")
+    public ModelAndView getProfile(Authentication authentication){
+        ModelAndView mav = new ModelAndView("companies/profile");
+        RegisterCompanyDTO company = companyService.findCompanyDTOByUsername(authentication.getName());
+        mav.addObject("company", company);
         return mav;
     }
 

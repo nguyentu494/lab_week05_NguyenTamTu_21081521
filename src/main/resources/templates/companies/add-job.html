@@ -15,16 +15,16 @@
       <div class="card">
         <div class="card-body">
           <h3 class="card-title text-center mb-4">Đăng Tin Tuyển Dụng</h3>
-          <form th:action="@{'/companies/add-job?a='+${account}}" th:object="${job}" method="post" >
+          <form th:action="@{'/companies/add-job'}" th:object="${job}" method="post" >
 
             <div class="form-group">
-              <label for="jobTitle">Vị Trí Tuyển Dụng</label>
-              <input type="text" class="form-control" id="jobTitle" placeholder="Nhập vị trí tuyển dụng" name="jobName" required>
+              <label for="jobName">Vị Trí Tuyển Dụng</label>
+              <input type="text" class="form-control" id="jobName" placeholder="Nhập vị trí tuyển dụng" th:field="*{jobName}" required>
             </div>
 
             <div class="form-group">
               <label for="jobDescription">Mô Tả Công Việc</label>
-              <textarea class="form-control" id="jobDescription" rows="4" placeholder="Nhập mô tả công việc" name="jobDesc" required></textarea>
+              <textarea class="form-control" id="jobDescription" rows="4" placeholder="Nhập mô tả công việc" th:field="*{jobDescription}" required></textarea>
             </div>
 
             <div class="form-group">
@@ -33,7 +33,7 @@
                 <!-- Một dòng kỹ năng mặc định -->
                 <div class="form-row align-items-center mb-2 skill-item">
                   <div class="col">
-                    <select class="form-control" name="selSkill1" required>
+                    <select class="form-control" th:field="*{skillIds}" required>
                       <option value="" disabled selected>Chọn trình độ</option>
                       <th:block th:each="skill : ${skills}">
                         <option th:text="${skill.skillName}" th:value="${skill.id}"></option>
@@ -41,7 +41,7 @@
                     </select>
                   </div>
                   <div class="col">
-                    <select class="form-control" name="selSkillLevel1" required>
+                    <select class="form-control" th:field="*{skillLevels}" required>
                       <option value="" disabled selected>Chọn trình độ</option>
                       <th:block th:each="sl : ${skillLevel}">
                         <option th:text="${sl.value}" th:value="${sl.key}"></option>
@@ -69,13 +69,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script th:inline="javascript">
-  // Chuyển dữ liệu skills và skillLevel từ Thymeleaf thành đối tượng JSON
-  const skills = /*[[${skills}]]*/ [];  // Cần được chuyển từ Thymeleaf thành dữ liệu JSON
-  const skillLevel = /*[[${skillLevel}]]*/ {};  // Cần được chuyển từ Thymeleaf thành dữ liệu JSON
-  console.log(skills)
-  document.getElementById('add-skill-btn').addEventListener('click', function() {
+  // Chuyển dữ liệu từ Thymeleaf thành đối tượng JSON
+  const skills = /*[[${skills}]]*/ []; // Danh sách kỹ năng
+  const skillLevel = /*[[${skillLevel}]]*/ {}; // Danh sách trình độ
+
+  document.getElementById('add-skill-btn').addEventListener('click', function () {
     const skillsContainer = document.getElementById('skills-container');
-    const skillIndex = skillsContainer.children.length + 1;
+    const skillIndex = skillsContainer.children.length; // Lấy số thứ tự index
 
     // Tạo một dòng kỹ năng mới
     const skillDiv = document.createElement('div');
@@ -85,22 +85,36 @@
     // Nội dung của dòng kỹ năng mới
     skillDiv.innerHTML = `
       <div class="col">
-        <select class="form-control" name="selSkill1" required>
+        <select class="form-control" name="skillIds[${skillIndex}]" required>
           <option value="" disabled selected>Chọn kỹ năng</option>
           ${skills.map(skill => `<option value="${skill.id}">${skill.skillName}</option>`).join('')}
         </select>
       </div>
       <div class="col">
-        <select class="form-control" name="selSkillLevel1" required>
+        <select class="form-control" name="skillLevels[${skillIndex}]" required>
           <option value="" disabled selected>Chọn trình độ</option>
           ${Object.keys(skillLevel).map(key => `<option value="${key}">${skillLevel[key]}</option>`).join('')}
         </select>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-danger btn-sm remove-skill" onclick="removeSkill(this)">Xóa</button>
       </div>
     `;
 
     // Thêm dòng kỹ năng mới vào container
     skillsContainer.appendChild(skillDiv);
   });
+
+  // Hàm xóa dòng kỹ năng
+  function removeSkill(button) {
+    const skillItem = button.closest('.skill-item');
+    const container = document.getElementById('skills-container');
+    if (container.children.length > 1) {
+      container.removeChild(skillItem);
+    } else {
+      alert("Bạn cần ít nhất một kỹ năng.");
+    }
+  }
 </script>
 
 </body>

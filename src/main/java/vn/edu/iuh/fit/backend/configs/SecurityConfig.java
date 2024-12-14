@@ -32,9 +32,12 @@ public class SecurityConfig {
                                 .requestMatchers("/").permitAll()
 
                                 .requestMatchers("/login").permitAll()
-//                                .anyRequest().authenticated()
-                                .anyRequest().permitAll()
-                ).csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+                                .requestMatchers("/companies/**").hasRole("COMPANY")
+                                .requestMatchers("/candidate/**").hasRole("CANDIDATE")
+                                .requestMatchers("/register").permitAll()
+                                .anyRequest().authenticated()
+//                                .anyRequest().permitAll()
+                )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/",true)

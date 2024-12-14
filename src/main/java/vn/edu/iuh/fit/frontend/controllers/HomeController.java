@@ -54,13 +54,6 @@ public class HomeController {
 
                 // Log thông tin user
 
-                // Nếu bạn có thêm thông tin trong userDetails, hãy cast về lớp custom của bạn
-                if (userDetails instanceof Company) {
-                    Company customUserDetails = (Company) userDetails;
-                    System.out.println("Full Name: " + customUserDetails.getCompName());
-                    System.out.println("Email: " + customUserDetails.getEmail());
-                }
-
                 // Chuyển hướng dựa trên role
                 if (authorities.toString().equalsIgnoreCase("[ROLE_COMPANY]")) {
                     mav.setViewName("redirect:/companies");

@@ -15,10 +15,13 @@ package vn.edu.iuh.fit.backend.services;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import vn.edu.iuh.fit.backend.dto.CreateJobDTO;
 import vn.edu.iuh.fit.backend.dto.JobSuggestionDTO;
 import vn.edu.iuh.fit.backend.models.Job;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface JobService {
@@ -26,7 +29,8 @@ public interface JobService {
     List<Job> findJobByCompanyId(long id);
     Page<Job> findJobByCompanyId(Pageable pageable, long id);
     Page<Job> findJobByCompanyEmail(Pageable pageable, String email);
-    Job save(Job job);
+    Job save(CreateJobDTO job, Principal principal);
     Page<JobSuggestionDTO> findJobsByUsername(Pageable pageable, String username);
+    Page<Job> findJobsByUser(Pageable pageable, String username);
 
 }

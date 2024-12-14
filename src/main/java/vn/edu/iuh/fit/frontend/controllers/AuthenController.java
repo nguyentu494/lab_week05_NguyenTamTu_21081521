@@ -66,8 +66,6 @@ public class AuthenController {
 
         ModelAndView mav = new ModelAndView();
 
-        System.out.println(candidateSave);
-
         if(status.equalsIgnoreCase("false")){
             boolean check = accountDtoService.findByUsername(account.getUsername());
 
@@ -103,9 +101,6 @@ public class AuthenController {
                 RegisterAccountDTO accountSave = (RegisterAccountDTO) session.getAttribute("accountSave");
                 accountSave.setPassword(encoder.encode(accountSave.getPassword()));
 
-
-
-
                 if(accountSave.getRole().toString().equals("CANDIDATE")) {
                     if(resultCandidate.hasErrors() ){
                         RegisterCandidateDTO candidate = new RegisterCandidateDTO();
@@ -127,6 +122,7 @@ public class AuthenController {
                     registrationService.register(null, accountSave, companySave);
                 }
                 mav.addObject("success", true);
+                mav.addObject("account", new RegisterAccountDTO());
             }catch (Exception ex){
                 resultAccount.addError(new FieldError("account", "username", ex.getMessage()));
                 mav.setViewName("auth/register");

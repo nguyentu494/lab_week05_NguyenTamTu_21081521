@@ -69,4 +69,5 @@ public class CompanyServiceImpl implements CompanyService {
                 .zipcode(company.getAddress().getZipcode())
                 .build();
     }
+
 }

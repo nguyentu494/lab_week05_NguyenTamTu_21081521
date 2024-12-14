@@ -24,12 +24,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.iuh.fit.backend.dto.JobSuggestionDTO;
+import vn.edu.iuh.fit.backend.models.Candidate;
+import vn.edu.iuh.fit.backend.models.Job;
+import vn.edu.iuh.fit.backend.services.CandidateService;
 import vn.edu.iuh.fit.backend.services.JobService;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
 public class CandidateController {
+    @Autowired
+    private CandidateService candidateService;
 
     @Autowired
     private JobService jobService;
@@ -38,12 +44,55 @@ public class CandidateController {
     public ModelAndView getCandidates(@RequestParam(name = "page") Optional<Integer> page, Authentication authentication) {
         ModelAndView mav = new ModelAndView();
         int currentPage = page.orElse(1);
-        Pageable pageable = PageRequest.of(currentPage-1, 3);
+        Pageable pageable = PageRequest.of(currentPage-1, 6);
         Page<JobSuggestionDTO> jobPage = jobService.findJobsByUsername(pageable, authentication.getName());
         mav.addObject("jobPage", jobPage);
         mav.addObject("totalPages", jobPage.getTotalPages());
         mav.addObject("page", currentPage);
         mav.setViewName("candidate/candidates");
+        return mav;
+    }
+    @GetMapping("/candidate/experience")
+    public ModelAndView getExperience(Principal principal) {
+        ModelAndView mav = new ModelAndView();
+
+        Candidate candidate = candidateService.findByAccount_Username(principal.getName());
+        mav.addObject("candidate", candidate);
+
+        mav.setViewName("candidate/experience");
+        return mav;
+    }
+
+    @GetMapping("/candidate/profile")
+    public ModelAndView getCandidate(Principal principal) {
+        ModelAndView mav = new ModelAndView();
+
+    Candidate candidate = candidateService.findByAccount_Username(principal.getName());
+
+    mav.addObject("candidate", candidate);
+
+        mav.setViewName("candidate/profile");
+        return mav;
+    }
+
+    @GetMapping("/candidate/hires")
+    public ModelAndView getHires( @RequestParam("page")Optional<Integer> page,
+                                  @RequestParam("size")Optional<Integer> size, Principal principal) {
+        ModelAndView mav = new ModelAndView();
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(12);
+
+        Candidate candidate = candidateService.findByAccount_Username(principal.getName());
+        mav.addObject("candidate", candidate);
+
+        mav.setViewName("candidate/hires");
+
+        Page<Job> jobPage =  jobService.findAll(currentPage, pageSize, "id", "desc");
+        int totalPages = jobPage.getTotalPages();
+
+        mav.addObject("jobs", jobPage);
+        mav.addObject("page", currentPage);
+        mav.addObject("totalPages", totalPages);
         return mav;
     }
 }
