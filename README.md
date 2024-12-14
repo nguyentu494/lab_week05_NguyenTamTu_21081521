@@ -77,7 +77,7 @@ Giao diện được xây dựng bằng **Thymeleaf** để đảm bảo tính t
 
 - **Trang Công Ty**:
   - **Trang chủ**: Công ty có thể xem các bài đăng vừa được đăng tải của các công ty
-  - 
+
     ![image](https://github.com/user-attachments/assets/28d8382e-b566-458f-a038-33a099d50c7d)
 
   - **Quản lý tin tuyển dụng**: Công ty có thể xem các bài đăng tuyển dụng của công ty đã đăng.
