@@ -93,29 +93,32 @@ Giao diện được xây dựng bằng **Thymeleaf** để đảm bảo tính t
 
     ![image](https://github.com/user-attachments/assets/4becd379-b71c-4a67-b847-ade7e6b0c8ef)
 
-
   - **Tìm kiếm ứng viên**: Hiển thị danh sách ứng viên phù hợp với kỹ năng của công việc đã đăng.
        
-     ![image](https://github.com/user-attachments/assets/6c7facad-718d-44cb-9a39-d46991a54777)
+    ![image](https://github.com/user-attachments/assets/6c7facad-718d-44cb-9a39-d46991a54777)
 
   - **Gửi email mời ứng tuyển**: Với một cú nhấp chuột, công ty có thể gửi email mời ứng viên tham gia ứng tuyển.
 
-     ![image](https://github.com/user-attachments/assets/6630eaf2-8f3a-44ba-9d0a-c5f668f39f94)
+    ![image](https://github.com/user-attachments/assets/6630eaf2-8f3a-44ba-9d0a-c5f668f39f94)
 
-     ![image](https://github.com/user-attachments/assets/d818351e-187b-4add-80f0-5694b0bd1f4a)
+    ![image](https://github.com/user-attachments/assets/d818351e-187b-4add-80f0-5694b0bd1f4a)
 
 - **Trang Ứng Viên**: Tiếp theo sẽ đăng nhập bằng account candidate
   - **Gợi ý công việc**: Hiển thị danh sách công việc phù hợp dựa trên kỹ năng hiện có của ứng viên.
 
-     ![image](https://github.com/user-attachments/assets/90d57b3f-9f61-4dcf-87cd-bdf0878613dd)
+    ![image](https://github.com/user-attachments/assets/33aa5ba2-e9a2-4a13-b214-8bef0dca934f)
 
   - **Học thêm kỹ năng**: Trong công việc được gợi ý sẽ có thêm các skill phù hợp, đồng thời sẽ đề cập các skill còn thiếu để học thêm phù hợp với công việc
  
-     ![image](https://github.com/user-attachments/assets/e0f363c2-ea8f-4b0d-9345-82bd549108bf)
+    ![image](https://github.com/user-attachments/assets/e76d066b-2eba-4782-b3d3-614e95b1c8cd)
+
+  - **Chi tiết công việc**: Khi click vào View Details sẽ show thông tin chi tiết của job đó để người dùng có thể đọc và ứng tuyển
+ 
+    ![image](https://github.com/user-attachments/assets/8b77bac1-d4df-48f7-ad84-ae53cfa922cd)
 
   - **Chatbot hỗ trợ**: Ứng viên có thể tìm hiểu thêm thông tin và nhận gợi ý từ chatbot tích hợp.
  
-    ![image](https://github.com/user-attachments/assets/34e28ed9-cd16-447d-84b7-b12d704952cf)
+    ![image](https://github.com/user-attachments/assets/640e6151-6abb-443f-b493-c9e1ba53063b)
 
 - **Trang Đăng Nhập/Đăng Ký**:
   - **Đăng ký linh hoạt**: Hỗ trợ đăng ký tài khoản với vai trò ứng viên hoặc công ty.
