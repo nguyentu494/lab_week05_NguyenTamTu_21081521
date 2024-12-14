@@ -96,22 +96,27 @@ Giao diện được xây dựng bằng **Thymeleaf** để đảm bảo tính t
 
   - **Tìm kiếm ứng viên**: Hiển thị danh sách ứng viên phù hợp với kỹ năng của công việc đã đăng.
        
-     ![image](https://github.com/user-attachments/assets/6c7facad-718d-44cb-9a39-d46991a54777)
+    ![image](https://github.com/user-attachments/assets/6c7facad-718d-44cb-9a39-d46991a54777)
 
   - **Gửi email mời ứng tuyển**: Với một cú nhấp chuột, công ty có thể gửi email mời ứng viên tham gia ứng tuyển.
 
-     ![image](https://github.com/user-attachments/assets/6630eaf2-8f3a-44ba-9d0a-c5f668f39f94)
+    ![image](https://github.com/user-attachments/assets/6630eaf2-8f3a-44ba-9d0a-c5f668f39f94)
 
-     ![image](https://github.com/user-attachments/assets/d818351e-187b-4add-80f0-5694b0bd1f4a)
+    ![image](https://github.com/user-attachments/assets/d818351e-187b-4add-80f0-5694b0bd1f4a)
 
 - **Trang Ứng Viên**: Tiếp theo sẽ đăng nhập bằng account candidate
   - **Gợi ý công việc**: Hiển thị danh sách công việc phù hợp dựa trên kỹ năng hiện có của ứng viên.
 
-     ![image](https://github.com/user-attachments/assets/90d57b3f-9f61-4dcf-87cd-bdf0878613dd)
+    ![image](https://github.com/user-attachments/assets/24832b01-5031-46b3-bfd9-9b35b5abd8a5)
 
   - **Học thêm kỹ năng**: Trong công việc được gợi ý sẽ có thêm các skill phù hợp, đồng thời sẽ đề cập các skill còn thiếu để học thêm phù hợp với công việc
  
-     ![image](https://github.com/user-attachments/assets/e0f363c2-ea8f-4b0d-9345-82bd549108bf)
+    ![image](https://github.com/user-attachments/assets/78943d0e-0cec-40d4-89fd-aa724fdbaa37)
+
+  - **Chi tiết công việc**: Khi click vào View Details sẽ show thông tin chi tiết của job đó để người dùng có thể đọc và ứng tuyển
+ 
+    ![image](https://github.com/user-attachments/assets/5a0edfbe-8394-44d2-8046-3f1409b49bc7)
+
 
   - **Chatbot hỗ trợ**: Ứng viên có thể tìm hiểu thêm thông tin và nhận gợi ý từ chatbot tích hợp.
  
